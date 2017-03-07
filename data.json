@@ -1,0 +1,23 @@
+{
+   "CandidateEducationWidget": {
+      "title": "All Candidates - Education Level",
+      "data": [
+         {
+            "name": "Master",
+            "count": 7
+         },
+         {
+            "name": "High School",
+            "count": 40
+         },
+         {
+            "name": "Is a chicken",
+            "count": 42
+         },
+         {
+            "name": "Graduate",
+            "count": 3
+         }
+      ]
+   }
+}
