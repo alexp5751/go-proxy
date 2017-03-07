@@ -1,30 +1,40 @@
 package main
 
 import (
-	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/Sirupsen/logrus"
+	"github.com/stevenmatthewt/tsr-bootcamp-proxy/handler"
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 func main() {
-	router := mux.NewRouter()
-	router.Handle("/", RootHandler{})
-	logrus.Info("Listening on port :4400")
-	log.Fatal(http.ListenAndServe(":4400", router))
-}
-
-type RootHandler struct {
-}
-
-func (h RootHandler) ServeHTTP(writer http.ResponseWriter, response *http.Request) {
-	raw, err := ioutil.ReadFile("./data.json")
-	if err != nil {
-		logrus.Errorf("The file could not be read: %s", err.Error())
-		writer.Write([]byte("a server error occurred :("))
-		return
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
 	}
+	router := mux.NewRouter()
+	router.Handle("/", rootHandler{})
+	router.Handle("/weather/{latitude},{longitude},{time}", handler.Weather{})
+
+	corsRouter := cors.Default().Handler(router)
+	logrus.Infof("Listening on port :%s", port)
+	log.Fatal(http.ListenAndServe(":"+port, corsRouter))
+}
+
+type rootHandler struct {
+}
+
+func (h rootHandler) ServeHTTP(writer http.ResponseWriter, response *http.Request) {
+	help := "Candidate Education Widget (Hai)  -   /candidate-education\n"
+	help += "Candidate Folders Widget (Ray)    -   /candidate-folders\n"
+	help += "Bar Chart Widget (Bipol)          -   /bar-chart\n"
+	help += "Header (Thomas)                   -   /header\n"
+	help += "Search (Thomas)                   -   /search\n"
+	help += "Events (Randy)                    -   /events\n"
+	raw := []byte(help)
 	writer.Write(raw)
 }

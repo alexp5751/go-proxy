@@ -1,0 +1,13 @@
+{
+    "dependencies": {
+        "github.com/Sirupsen/logrus": {
+            "revision": "df78bc75a33fd9b582230e052be33dff861f3a4a"
+        },
+        "github.com/gorilla/mux": {
+            "branch": "master"
+        },
+        "github.com/rs/cors": {
+            "branch": "master"
+        }
+    }
+}
