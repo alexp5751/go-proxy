@@ -105,7 +105,7 @@ func (w Weather) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 }
 
 func (w Weather) getTimeMachineWeather(lat string, long string, time int64) (DarkSkyTimeMachineResponse, error) {
-	resp, err := http.Get(fmt.Sprintf("https://api.darksky.net/forecast/15d5ee94d008dc3797101a8b43719747/%s,%s,%d", lat, long, time))
+	resp, err := http.Get(fmt.Sprintf("https://api.darksky.net/forecast//%s,%s,%d", lat, long, time))
 	if err != nil {
 		return DarkSkyTimeMachineResponse{}, err
 	}
@@ -123,7 +123,7 @@ func (w Weather) getTimeMachineWeather(lat string, long string, time int64) (Dar
 }
 
 func (w Weather) getForecastWeather(lat string, long string) (DarkSkyForecastResponse, error) {
-	resp, err := http.Get(fmt.Sprintf("https://api.darksky.net/forecast/15d5ee94d008dc3797101a8b43719747/%s,%s", lat, long))
+	resp, err := http.Get(fmt.Sprintf("https://api.darksky.net/forecast//%s,%s", lat, long))
 	if err != nil {
 		return DarkSkyForecastResponse{}, err
 	}
