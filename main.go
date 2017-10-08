@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/stevenmatthewt/tsr-bootcamp-proxy/handler"
+	"github.com/alexp5751/go-proxy/handler"
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 )
@@ -18,7 +18,7 @@ func main() {
 	}
 	router := mux.NewRouter()
 	router.Handle("/", rootHandler{})
-	router.Handle("/weather/{latitude},{longitude},{time}", handler.Weather{})
+	router.Handle("/weather/{latitude},{longitude}", handler.Weather{})
 
 	corsRouter := cors.Default().Handler(router)
 	logrus.Infof("Listening on port :%s", port)
